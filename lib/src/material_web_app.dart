@@ -20,6 +20,8 @@ class WebStructController {
   int webStructLargePage = 1200;
   int webStructMediumPage = 800;
 
+  // bool withMedium = false;
+
   Widget? footer;
 
   Widget? header;

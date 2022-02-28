@@ -2,20 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_web_struct/flutter_web_struct.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+  MyApp({Key? key}) : super(key: key);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     var ctrl = WebStructController();
     ctrl.header = Container(
       color: Colors.red,
-      child: Center(
+      height: 48,
+      child: const Center(
         child: Text("This is header"),
+      ),
+    );
+    ctrl.footer = Container(
+      color: Colors.white,
+      height: 24,
+      child: const Center(
+        child: Text(
+          "This is footer",
+        ),
       ),
     );
 
@@ -31,13 +40,13 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends WebPage {
-  MyHomePage(title) : super(title);
+  MyHomePage(title) : super(title, typePage: TypePage.FULLCONTENT);
 
   @override
   Widget largeContent(BuildContext context) {
-    // TODO: implement largeContent
     return Container(
-      child: Center(
+      color: Colors.blue,
+      child: const Center(
         child: Text(
           "Large content",
         ),
@@ -48,7 +57,8 @@ class MyHomePage extends WebPage {
   @override
   Widget smallContent(BuildContext context) {
     return Container(
-      child: Center(
+      color: Colors.green,
+      child: const Center(
         child: Text(
           "Small content",
         ),
@@ -58,9 +68,9 @@ class MyHomePage extends WebPage {
 
   @override
   Widget mediumContent(BuildContext context) {
-    // TODO: implement mediumContent
     return Container(
-      child: Center(
+      color: Colors.purple,
+      child: const Center(
         child: Text(
           "Medium content",
         ),

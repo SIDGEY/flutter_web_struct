@@ -18,6 +18,7 @@ abstract class WebPage extends StatelessWidget {
     return ResponsiveWidget(
       largeScreen: largeScreen(context),
       smallScreen: smallScreen(context),
+      mediumScreen: mediumScreen(context),
     );
   }
 
@@ -29,30 +30,59 @@ abstract class WebPage extends StatelessWidget {
             ? SingleChildScrollView(
                 child: [
                   largeContent(context),
-                  webStructController.footer ?? SizedBox()
+                  webStructController.footer ?? const SizedBox()
                 ].listToColumn(),
               ).withExpanded()
             : [
-                largeContent(context).withExpanded(),
-                webStructController.footer ?? SizedBox()
-              ].listToColumn(),
+                largeContent(context).withFlexible(),
+                webStructController.footer ?? const SizedBox()
+              ].listToColumn().withExpanded(),
+      ].listToColumn(),
+    );
+  }
+
+  Scaffold mediumScreen(BuildContext context) {
+    return Scaffold(
+      body: [
+        webStructController.header ?? SizedBox(),
+        typePage == TypePage.SCROLLVIEW
+            ? SingleChildScrollView(
+                child: [
+                  mediumContent(context),
+                  webStructController.footer ?? const SizedBox()
+                ].listToColumn(),
+              ).withExpanded()
+            : [
+                mediumContent(context).withFlexible(),
+                webStructController.footer ?? const SizedBox()
+              ].listToColumn().withExpanded(),
       ].listToColumn(),
     );
   }
 
   Scaffold smallScreen(BuildContext context) {
     return Scaffold(
-      appBar: webStructController.appBar ??
-          AppBar(
-            title: Text(title),
-            // backgroundColor: Colors.white24,
-          ),
-      drawer: webStructController.drawer,
-      body: SingleChildScrollView(
-        child: [smallContent(context), webStructController.footer ?? SizedBox()]
-            .listToColumn(),
-      ),
-    );
+        appBar: webStructController.appBar ??
+            AppBar(
+              title: Text(title),
+              // backgroundColor: Colors.white24,
+            ),
+        drawer: webStructController.drawer,
+        body: /* typePage == TypePage.SCROLLVIEW
+          ?
+      */
+            SingleChildScrollView(
+          child: [
+            smallContent(context),
+            webStructController.footer ?? const SizedBox()
+          ].listToColumn(),
+        )
+        /* : [
+              smallContent(context).withFlexible(),
+              webStructController.footer ?? SizedBox()
+            ].listToColumn().withExpanded(),
+      */
+        );
   }
 
   Widget largeContent(BuildContext context);
