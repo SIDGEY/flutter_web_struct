@@ -11,6 +11,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var ctrl = WebStructController();
+
+    ctrl.webStructUrlBase = "http://www.mywebsite.com";
     ctrl.header = Container(
       color: Colors.red,
       height: 48,

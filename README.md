@@ -33,6 +33,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
    
     var ctrl = WebStructController();
+    //Configure Base Url if you need
+    ctrl.webStructUrlBase = "http://www.mywebsite.com";
+
     // this is header
     ctrl.header = Container(
       color: Colors.red,
@@ -117,3 +120,9 @@ class MyHomePage extends WebPage {
 
 ```
 
+
+Configure your screen 
+```dart
+    ctrl.webStructLargePage = 1200; //default value
+    ctrl.webStructMediumPage = 800; //default value
+```
