@@ -55,4 +55,16 @@ class MyHomePage extends WebPage {
       ),
     );
   }
+
+  @override
+  Widget mediumContent(BuildContext context) {
+    // TODO: implement mediumContent
+    return Container(
+      child: Center(
+        child: Text(
+          "Medium content",
+        ),
+      ),
+    );
+  }
 }

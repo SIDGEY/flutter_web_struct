@@ -5,10 +5,13 @@ import 'package:flutter_web_struct/src/responsive_widget.dart';
 
 import 'material_web_app.dart';
 
+enum TypePage { SCROLLVIEW, FULLCONTENT }
+
 abstract class WebPage extends StatelessWidget {
-  WebPage(this.title) : super();
+  WebPage(this.title, {this.typePage = TypePage.SCROLLVIEW}) : super();
 
   late String title;
+  late TypePage typePage;
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +25,17 @@ abstract class WebPage extends StatelessWidget {
     return Scaffold(
       body: [
         webStructController.header ?? SizedBox(),
-        SingleChildScrollView(
-          child: [
-            largeContent(context),
-            webStructController.footer ?? SizedBox()
-          ].listToColumn(),
-        ).withExpanded()
+        typePage == TypePage.SCROLLVIEW
+            ? SingleChildScrollView(
+                child: [
+                  largeContent(context),
+                  webStructController.footer ?? SizedBox()
+                ].listToColumn(),
+              ).withExpanded()
+            : [
+                largeContent(context).withExpanded(),
+                webStructController.footer ?? SizedBox()
+              ].listToColumn(),
       ].listToColumn(),
     );
   }
@@ -48,5 +56,6 @@ abstract class WebPage extends StatelessWidget {
   }
 
   Widget largeContent(BuildContext context);
+  Widget mediumContent(BuildContext context);
   Widget smallContent(BuildContext context);
 }
