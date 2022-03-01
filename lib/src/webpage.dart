@@ -1,6 +1,5 @@
 import 'package:flemme/flemme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_web_struct/src/responsive_widget.dart';
 
 import 'material_web_app.dart';
@@ -25,7 +24,7 @@ abstract class WebPage extends StatelessWidget {
   Scaffold largeScreen(BuildContext context) {
     return Scaffold(
       body: [
-        webStructController.header ?? SizedBox(),
+        webStructController.header ?? const SizedBox(),
         typePage == TypePage.SCROLLVIEW
             ? SingleChildScrollView(
                 child: [
@@ -44,7 +43,7 @@ abstract class WebPage extends StatelessWidget {
   Scaffold mediumScreen(BuildContext context) {
     return Scaffold(
       body: [
-        webStructController.header ?? SizedBox(),
+        webStructController.header ?? const SizedBox(),
         typePage == TypePage.SCROLLVIEW
             ? SingleChildScrollView(
                 child: [
@@ -62,27 +61,25 @@ abstract class WebPage extends StatelessWidget {
 
   Scaffold smallScreen(BuildContext context) {
     return Scaffold(
-        appBar: webStructController.appBar ??
-            AppBar(
-              title: Text(title),
-              // backgroundColor: Colors.white24,
-            ),
-        drawer: webStructController.drawer,
-        body: /* typePage == TypePage.SCROLLVIEW
-          ?
-      */
-            SingleChildScrollView(
-          child: [
-            smallContent(context),
-            webStructController.footer ?? const SizedBox()
-          ].listToColumn(),
-        )
-        /* : [
-              smallContent(context).withFlexible(),
-              webStructController.footer ?? SizedBox()
-            ].listToColumn().withExpanded(),
-      */
-        );
+      appBar: webStructController.appBar ??
+          AppBar(
+            title: Text(title),
+          ),
+      drawer: webStructController.drawer,
+      body: [
+        typePage == TypePage.SCROLLVIEW
+            ? SingleChildScrollView(
+                child: [
+                  smallContent(context),
+                  webStructController.footer ?? const SizedBox()
+                ].listToColumn(),
+              ).withExpanded()
+            : [
+                smallContent(context).withFlexible(),
+                webStructController.footer ?? const SizedBox()
+              ].listToColumn().withExpanded(),
+      ].listToColumn(),
+    );
   }
 
   Widget largeContent(BuildContext context);
