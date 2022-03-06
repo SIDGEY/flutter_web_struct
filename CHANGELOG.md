@@ -1,5 +1,10 @@
+## 0.0.3
+//TODO
+
+
+
 ## 0.0.2
-# add Structure only Large and Small
+ add Structure only Large and Small
 
 
 ## 0.0.1
