@@ -1,6 +1,6 @@
 name: flutter_web_struct
 description: This package simplifies the creation of web applications taking into account responsiveness and much more.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/SIDGEY/flutter_web_struct
 
 
@@ -9,7 +9,7 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  flemme: ^0.0.4
+  flemme: ^0.0.5
   flutter:
     sdk: flutter
   flutter_web_plugins:

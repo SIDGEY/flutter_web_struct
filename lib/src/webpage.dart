@@ -62,27 +62,25 @@ abstract class WebPage extends StatelessWidget {
 
   Scaffold smallScreen(BuildContext context) {
     return Scaffold(
-        appBar: webStructController.appBar ??
-            AppBar(
-              title: Text(title),
-              // backgroundColor: Colors.white24,
-            ),
-        drawer: webStructController.drawer,
-        body: /* typePage == TypePage.SCROLLVIEW
-          ?
-      */
-            SingleChildScrollView(
-          child: [
-            smallContent(context),
-            webStructController.footer ?? const SizedBox()
-          ].listToColumn(),
-        )
-        /* : [
-              smallContent(context).withFlexible(),
-              webStructController.footer ?? SizedBox()
-            ].listToColumn().withExpanded(),
-      */
-        );
+      appBar: webStructController.appBar ??
+          AppBar(
+            title: Text(title),
+          ),
+      drawer: webStructController.drawer,
+      body: [
+        typePage == TypePage.SCROLLVIEW
+            ? SingleChildScrollView(
+                child: [
+                  smallContent(context),
+                  webStructController.footer ?? const SizedBox()
+                ].listToColumn(),
+              ).withExpanded()
+            : [
+                smallContent(context).withFlexible(),
+                webStructController.footer ?? const SizedBox()
+              ].listToColumn().withExpanded(),
+      ].listToColumn(),
+    );
   }
 
   Widget largeContent(BuildContext context);

@@ -1,6 +1,5 @@
 import 'package:flemme/flemme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../flutter_web_struct.dart';
 
@@ -8,10 +7,15 @@ enum TypePage { SCROLLVIEW, FULLCONTENT }
 enum TypeMenu { DRAWER, HEADER }
 
 abstract class MobilePage extends StatelessWidget {
-  MobilePage(this.title, {this.typePage = TypePage.SCROLLVIEW}) : super();
+  const MobilePage(this.title,
+      {this.typePage = TypePage.SCROLLVIEW,
+      this.typeMenu = TypeMenu.DRAWER,
+      Key? key})
+      : super(key: key);
 
-  late String title;
-  late TypePage typePage;
+  final String title;
+  final TypePage typePage;
+  final TypeMenu typeMenu;
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +28,11 @@ abstract class MobilePage extends StatelessWidget {
 
   Scaffold largeScreen(BuildContext context) {
     return Scaffold(
+      drawer: typeMenu == TypeMenu.DRAWER ? webStructController.drawer : null,
       body: [
-        webStructController.header ?? SizedBox(),
+        typeMenu == TypeMenu.HEADER
+            ? (webStructController.header ?? const SizedBox())
+            : const SizedBox(),
         typePage == TypePage.SCROLLVIEW
             ? SingleChildScrollView(
                 child: [
@@ -41,51 +48,29 @@ abstract class MobilePage extends StatelessWidget {
     );
   }
 
-  Scaffold mediumScreen(BuildContext context) {
+  Scaffold smallScreen(BuildContext context) {
     return Scaffold(
+      appBar: webStructController.appBar ??
+          AppBar(
+            title: Text(title),
+          ),
+      drawer: webStructController.drawer,
       body: [
-        webStructController.header ?? SizedBox(),
         typePage == TypePage.SCROLLVIEW
             ? SingleChildScrollView(
                 child: [
-                  mediumContent(context),
+                  smallContent(context),
                   webStructController.footer ?? const SizedBox()
                 ].listToColumn(),
               ).withExpanded()
             : [
-                mediumContent(context).withFlexible(),
+                smallContent(context).withFlexible(),
                 webStructController.footer ?? const SizedBox()
               ].listToColumn().withExpanded(),
       ].listToColumn(),
     );
   }
 
-  Scaffold smallScreen(BuildContext context) {
-    return Scaffold(
-        appBar: webStructController.appBar ??
-            AppBar(
-              title: Text(title),
-              // backgroundColor: Colors.white24,
-            ),
-        drawer: webStructController.drawer,
-        body: /* typePage == TypePage.SCROLLVIEW
-          ?
-      */
-            SingleChildScrollView(
-          child: [
-            smallContent(context),
-            webStructController.footer ?? const SizedBox()
-          ].listToColumn(),
-        )
-        /* : [
-              smallContent(context).withFlexible(),
-              webStructController.footer ?? SizedBox()
-            ].listToColumn().withExpanded(),
-      */
-        );
-  }
-
   Widget largeContent(BuildContext context);
-  Widget mediumContent(BuildContext context);
   Widget smallContent(BuildContext context);
 }
