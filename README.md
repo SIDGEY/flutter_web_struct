@@ -6,7 +6,7 @@ Add `flutter_web_struct` as a dependency in your pubspec.yaml file.
 
 ```yaml
 dependencies:
-flutter_web_struct: ^0.0.1
+flutter_web_struct: ^0.0.2
 ```
 
 ## Usage
@@ -120,6 +120,40 @@ class MyHomePage extends WebPage {
 
 ```
 
+
+Or Create your page  extends MobilePage
+```dart
+
+
+class MyMobilePage extends MobilePage{
+  MyMobilePage(String title) : super(title,typePage: TypePage.FULLCONTENT,typeMenu: TypeMenu.DRAWER);
+
+  @override
+  Widget largeContent(BuildContext context) {
+    return  Container(
+      color: Colors.blue,
+      child: const Center(
+        child: Text(
+          "Large & medium content",
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget smallContent(BuildContext context) {
+    return  Container(
+      color: Colors.blue,
+      child: const Center(
+        child: Text(
+          "Small content",
+        ),
+      ),
+    );
+  }
+}
+
+```
 
 Configure your screen 
 ```dart

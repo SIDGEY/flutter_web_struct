@@ -7,6 +7,9 @@ int webStructMediumPage = 800;
 
 WebStructController webStructController = WebStructController();
 
+enum TypePage { SCROLLVIEW, FULLCONTENT }
+enum TypeMenu { DRAWER, HEADER }
+
 class WebStructController {
   static final WebStructController _singleton = WebStructController._internal();
 

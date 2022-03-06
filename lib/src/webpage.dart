@@ -5,8 +5,6 @@ import 'package:flutter_web_struct/src/responsive_widget.dart';
 
 import 'material_web_app.dart';
 
-enum TypePage { SCROLLVIEW, FULLCONTENT }
-
 abstract class WebPage extends StatelessWidget {
   WebPage(this.title, {this.typePage = TypePage.SCROLLVIEW}) : super();
 

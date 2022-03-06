@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../flutter_web_struct.dart';
 
-enum TypePage { SCROLLVIEW, FULLCONTENT }
-enum TypeMenu { DRAWER, HEADER }
-
 abstract class MobilePage extends StatelessWidget {
   const MobilePage(this.title,
       {this.typePage = TypePage.SCROLLVIEW,
